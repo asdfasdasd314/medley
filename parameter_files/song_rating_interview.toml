@@ -1,0 +1,17 @@
+# Rating scale (inclusive)
+min_rating = 0
+max_rating = 10
+
+# Placeholder playlist for the interview prototype
+songs = [
+  "Midnight City — M83",
+  "Motion Picture Soundtrack — Radiohead",
+  "Pink + White — Frank Ocean",
+  "Teardrop — Massive Attack",
+  "Holocene — Bon Iver",
+  "Reckoner — Radiohead",
+  "Myth — Beach House",
+  "Breathe Me — Sia",
+  "Intro — The xx",
+  "Saturnz Barz — Gorillaz",
+]

@@ -43,3 +43,7 @@ Desktop.ini
 *.temp
 *.bak
 *~
+
+# Next.js
+*.tsbuildinfo
+.vercel
