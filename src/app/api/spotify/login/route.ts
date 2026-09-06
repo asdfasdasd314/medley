@@ -3,6 +3,7 @@ import {
   createCodeChallenge,
   createCodeVerifier,
   createOAuthState,
+  getSpotifyAppUrl,
   getSpotifyEnv,
   pkceCookieOptions,
   spotifyCookieNames,
@@ -15,6 +16,14 @@ export async function GET(request: NextRequest) {
     const homeUrl = new URL("/", request.url);
     homeUrl.searchParams.set("spotify_error", "missing_config");
     return NextResponse.redirect(homeUrl);
+  }
+
+  const canonicalLoginUrl = getSpotifyAppUrl(
+    "/api/spotify/login",
+    request.url,
+  );
+  if (canonicalLoginUrl.origin !== request.nextUrl.origin) {
+    return NextResponse.redirect(canonicalLoginUrl);
   }
 
   const verifier = createCodeVerifier();

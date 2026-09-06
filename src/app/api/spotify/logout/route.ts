@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import {
   clearAuthCookieOptions,
+  getSpotifyAppUrl,
   spotifyCookieNames,
 } from "@/lib/spotify/auth";
 
 export async function GET(request: NextRequest) {
-  const response = NextResponse.redirect(new URL("/", request.url));
+  const response = NextResponse.redirect(getSpotifyAppUrl("/", request.url));
   const clear = clearAuthCookieOptions();
 
   response.cookies.set(spotifyCookieNames.ACCESS_COOKIE, "", clear);

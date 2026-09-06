@@ -31,3 +31,4 @@ HACKING
 - 2026-09-05: Removed interview hello-world; shipped PKCE OAuth, playlist/track API helpers, and accordion browser on `/`.
 - 2026-09-06: Prevented OAuth redirects with missing Spotify environment values and added local setup guidance for the Client ID and exact callback URI.
 - 2026-09-06: Fixed the Spotify OAuth redirect configuration by switching the local callback URI from `localhost` to `127.0.0.1`.
+- 2026-09-06: Made the configured callback origin authoritative for login, callback, and logout redirects so PKCE cookies remain available when localhost and 127.0.0.1 are mixed.

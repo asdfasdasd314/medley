@@ -34,6 +34,11 @@ export function getSpotifyEnv() {
   };
 }
 
+export function getSpotifyAppUrl(pathname: string, fallbackUrl: string) {
+  const { redirectUri } = getSpotifyEnv();
+  return new URL(pathname, redirectUri || fallbackUrl);
+}
+
 function cookieDefaults() {
   return {
     httpOnly: true,
