@@ -4,7 +4,7 @@
 
 ## Local Spotify setup
 
-Copy `.env.example` to `.env.local`, then set `SPOTIFY_CLIENT_ID` to the Client ID from your Spotify Developer Dashboard. Register `http://localhost:3000/api/spotify/callback` as an exact Redirect URI on the same Spotify app, and restart the Next.js dev server after changing `.env.local`.
+Copy `.env.example` to `.env.local`, then set `SPOTIFY_CLIENT_ID` to the Client ID from your Spotify Developer Dashboard. Register `http://127.0.0.1:3000/api/spotify/callback` as an exact Redirect URI on the same Spotify app, and restart the Next.js dev server after changing `.env.local`.
 
 ## Overview
 
