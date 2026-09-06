@@ -22,7 +22,8 @@ export async function GET(request: NextRequest) {
     "/api/spotify/login",
     request.url,
   );
-  if (canonicalLoginUrl.origin !== request.nextUrl.origin) {
+  const requestHost = request.headers.get("host") ?? request.nextUrl.host;
+  if (canonicalLoginUrl.host !== requestHost) {
     return NextResponse.redirect(canonicalLoginUrl);
   }
 
