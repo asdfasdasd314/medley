@@ -152,9 +152,14 @@ h1 {
   animation: rise 480ms ease-out both;
 }
 
+.playlist-toggle::-webkit-details-marker {
+  display: none;
+}
+
 .playlist-toggle {
   width: 100%;
   display: grid;
+  list-style: none;
   grid-template-columns: 1.25rem 1fr auto;
   gap: 0.75rem;
   align-items: baseline;
@@ -164,6 +169,10 @@ h1 {
   color: inherit;
   text-align: left;
   cursor: pointer;
+}
+
+.playlist-row details[open] .playlist-chevron {
+  transform: rotate(90deg);
 }
 
 .playlist-chevron {

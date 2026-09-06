@@ -8,7 +8,7 @@ Connects a Spotify account via Authorization Code + PKCE (Client ID + Redirect U
 - **Secrets**: `SPOTIFY_CLIENT_ID` and `SPOTIFY_REDIRECT_URI` live in `.env.local` only; never in parameter files.
 - **Playlists**: `GET /v1/me/playlists` (owned + followed as Spotify returns them), paginated with `playlist_limit`.
 - **Tracks**: `GET /v1/playlists/{id}/tracks` on expand, paginated with `tracks_limit`. No Liked Songs endpoint in this slice.
-- **UI**: Accordion list on home — N playlist rows, expand to see M_i tracks; Connect / Disconnect controls.
+- **UI**: Native details accordion on home — N playlist rows, expand to see M_i tracks; Connect / Disconnect controls. Track loading remains on demand after a row opens.
 
 ## Relevant Files
 - `src/app/page.tsx`: Home playlist browser entry (auth gate + list).
@@ -33,3 +33,4 @@ HACKING
 - 2026-09-06: Fixed the Spotify OAuth redirect configuration by switching the local callback URI from `localhost` to `127.0.0.1`.
 - 2026-09-06: Made the configured callback origin authoritative for login, callback, and logout redirects so PKCE cookies remain available when localhost and 127.0.0.1 are mixed.
 - 2026-09-06: Prevented the login route from looping when Next.js normalizes its request origin by comparing the configured host with the incoming Host header.
+- 2026-09-06: Changed playlist rows to native details disclosures so they open even when client hydration is unavailable, while preserving on-demand track loading and showing request failures in the expanded panel.
