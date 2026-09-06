@@ -3,8 +3,15 @@ import { PlaylistBrowser } from "./playlist-browser";
 import { listPlaylists } from "@/lib/spotify/api";
 import { hasSpotifySession } from "@/lib/spotify/auth";
 
-export default async function Home() {
+type HomeProps = {
+  searchParams: Promise<{
+    [key: string]: string | string[] | undefined;
+  }>;
+};
+
+export default async function Home({ searchParams }: HomeProps) {
   const connected = await hasSpotifySession();
+  const { spotify_error: spotifyError } = await searchParams;
 
   if (!connected) {
     return (
@@ -16,7 +23,17 @@ export default async function Home() {
             Connect your Spotify account to browse your playlists and the songs
             inside them.
           </p>
-          <Link className="primary-link" href="/api/spotify/login">
+          {spotifyError === "missing_config" && (
+            <p className="config-notice">
+              Spotify is not configured yet. Add SPOTIFY_CLIENT_ID and
+              SPOTIFY_REDIRECT_URI to .env.local, then restart the dev server.
+            </p>
+          )}
+          <Link
+            className="primary-link"
+            href="/api/spotify/login"
+            prefetch={false}
+          >
             Connect Spotify
           </Link>
         </div>

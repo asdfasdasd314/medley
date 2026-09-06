@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import {
   createCodeChallenge,
   createCodeVerifier,
@@ -8,8 +8,15 @@ import {
   spotifyCookieNames,
 } from "@/lib/spotify/auth";
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   const { clientId, redirectUri } = getSpotifyEnv();
+
+  if (!clientId || !redirectUri) {
+    const homeUrl = new URL("/", request.url);
+    homeUrl.searchParams.set("spotify_error", "missing_config");
+    return NextResponse.redirect(homeUrl);
+  }
+
   const verifier = createCodeVerifier();
   const challenge = createCodeChallenge(verifier);
   const state = createOAuthState();

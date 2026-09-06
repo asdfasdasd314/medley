@@ -29,8 +29,8 @@ export function createOAuthState() {
 
 export function getSpotifyEnv() {
   return {
-    clientId: process.env.SPOTIFY_CLIENT_ID ?? "",
-    redirectUri: process.env.SPOTIFY_REDIRECT_URI ?? "",
+    clientId: process.env.SPOTIFY_CLIENT_ID?.trim() ?? "",
+    redirectUri: process.env.SPOTIFY_REDIRECT_URI?.trim() ?? "",
   };
 }
 
