@@ -96,44 +96,108 @@ h1 {
   transform: translateY(-1px);
 }
 
-.interview-page {
+.ghost-link {
+  display: inline-flex;
+  align-self: flex-start;
+  margin-top: 0.35rem;
+  padding: 0.55rem 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: 0.5rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: border-color 140ms ease, color 140ms ease;
+}
+
+.ghost-link:hover {
+  border-color: rgba(10, 107, 99, 0.45);
+  color: var(--ink);
+}
+
+.browse-page {
   width: min(100%, 44rem);
   margin: 0 auto;
   padding: 2rem 1.15rem 4rem;
 }
 
-.interview-header {
+.browse-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
   margin-bottom: 1.75rem;
   animation: rise 420ms ease-out both;
 }
 
-.interview-form .progress {
-  margin: 0 0 1rem;
-  color: var(--muted);
-  font-size: 0.92rem;
-  font-variant-numeric: tabular-nums;
-}
-
-.song-list {
+.playlist-list {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
 }
 
-.song-row {
-  padding: 1rem 0 1.1rem;
+.playlist-row {
   border-bottom: 1px solid var(--line);
   animation: rise 480ms ease-out both;
 }
 
-.song-meta {
+.playlist-toggle {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.25rem 1fr auto;
+  gap: 0.75rem;
+  align-items: baseline;
+  padding: 1rem 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.playlist-chevron {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.playlist-name {
+  font-family: var(--font-syne), sans-serif;
+  font-size: 1.05rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  line-height: 1.35;
+}
+
+.playlist-count {
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.track-panel {
+  padding: 0 0 1rem 2rem;
+}
+
+.track-status {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.track-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.track-row {
   display: flex;
   gap: 0.75rem;
   align-items: baseline;
-  margin-bottom: 0.75rem;
 }
 
 .song-index {
@@ -144,52 +208,25 @@ h1 {
   font-variant-numeric: tabular-nums;
 }
 
+.track-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
 .song-title {
   font-family: var(--font-syne), sans-serif;
-  font-size: 1.05rem;
+  font-size: 0.98rem;
   font-weight: 650;
   letter-spacing: -0.02em;
   line-height: 1.35;
 }
 
-.score-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem;
-}
-
-.score-btn {
-  width: 2.35rem;
-  height: 2.35rem;
-  border: 1px solid var(--line);
-  border-radius: 0.5rem;
-  background: rgba(255, 255, 255, 0.55);
-  color: var(--ink);
+.track-artists {
+  color: var(--muted);
   font-size: 0.88rem;
-  font-weight: 650;
-  font-variant-numeric: tabular-nums;
-  cursor: pointer;
-  transition:
-    background 140ms ease,
-    border-color 140ms ease,
-    color 140ms ease,
-    transform 140ms ease;
-}
-
-.score-btn:hover {
-  border-color: rgba(10, 107, 99, 0.5);
-  transform: translateY(-1px);
-}
-
-.score-btn.selected {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #f4f7fa;
-  box-shadow: 0 8px 18px rgba(10, 107, 99, 0.28);
-}
-
-.score-btn:active {
-  transform: scale(0.96);
+  line-height: 1.35;
 }
 
 @keyframes rise {
@@ -204,13 +241,15 @@ h1 {
 }
 
 @media (max-width: 480px) {
-  .score-btn {
-    width: 2.15rem;
-    height: 2.15rem;
-    font-size: 0.82rem;
+  .browse-header {
+    flex-direction: column;
+  }
+
+  .track-panel {
+    padding-left: 1.25rem;
   }
 
   .song-title {
-    font-size: 0.98rem;
+    font-size: 0.95rem;
   }
 }

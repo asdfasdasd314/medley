@@ -1,0 +1,5 @@
+# Page size when listing the signed-in user's playlists
+playlist_limit = 50
+
+# Page size when listing tracks inside a playlist
+tracks_limit = 100

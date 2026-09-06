@@ -14,7 +14,7 @@ const syne = Syne({
 
 export const metadata: Metadata = {
   title: "Medley",
-  description: "Personal music preference interviews",
+  description: "Browse your Spotify playlists",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
