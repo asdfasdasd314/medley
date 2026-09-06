@@ -1,0 +1,2 @@
+# Path to the JSON song store (relative to the project root)
+database_path = "data/songs.json"
