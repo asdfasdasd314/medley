@@ -1,0 +1,34 @@
+# Supabase Auth
+
+## Summary
+Hosted Supabase Auth for Medley email/password login and signup. App Router cookie sessions via `@supabase/ssr`; middleware refreshes the session and hard-gates the app so only `/login`, `/signup`, and static assets are public. Song JSON storage stays untouched — this feature only scaffolds identity for later user-scoped data.
+
+## Key Points
+- **Sign-in**: Email + password only. Confirm email must be disabled in the Supabase Auth dashboard so signup returns a session immediately (no confirm callback route).
+- **Hard gate**: Unauthenticated requests redirect to `/login`. Spotify connect/browse sit behind Medley login; Spotify cookies stay a separate namespace.
+- **Secrets**: `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` live in `.env.local` only; never in parameter files. No service-role key in the client app.
+- **Missing config**: When URL/anon key are absent, login/signup show a `missing_config` notice (same spirit as Spotify); middleware still treats the user as logged out.
+- **Redirect**: After login/signup, send the user to `post_login_redirect` from the parameter file (default `/`).
+
+## Relevant Files
+- `src/lib/supabase/env.ts`: Public env reader + `isSupabaseConfigured`.
+- `src/lib/supabase/params.ts`: Reads `post_login_redirect` from the parameter file.
+- `src/lib/supabase/client.ts`: Browser anon client.
+- `src/lib/supabase/server.ts`: Server client with cookie read/write.
+- `src/lib/supabase/middleware.ts`: Session refresh + hard-gate redirect helper.
+- `src/lib/supabase/auth.ts`: `getMedleyUser` session helper.
+- `src/middleware.ts`: Next.js middleware entry (refresh + gate).
+- `src/app/login/page.tsx`: Login page + form.
+- `src/app/signup/page.tsx`: Signup page + form.
+- `src/app/auth/logout/route.ts`: Clears the Supabase session.
+- `src/app/page.tsx`: Home header Medley session / logout links (Spotify UI unchanged in role).
+- `parameter_files/supabase_auth.toml`: Non-secret redirects/toggles.
+- `.env.example` / `README.md`: Hosted project setup + Confirm-email-off note.
+- `feature_files/song_database.md`: Future consumer of Medley user identity; not migrated here.
+
+## Dev Mode
+HACKING
+
+## State Log
+- 2026-09-07: Initialized feature file for hosted Supabase email/password auth scaffolding.
+- 2026-09-07: Shipped hosted Supabase email/password clients, hard-gate middleware, login/signup/logout UI, and env docs; left JSON song DB unchanged.

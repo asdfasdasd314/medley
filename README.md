@@ -6,6 +6,10 @@
 
 Copy `.env.example` to `.env.local`, then set `SPOTIFY_CLIENT_ID` to the Client ID from your Spotify Developer Dashboard. Register `http://127.0.0.1:3000/api/spotify/callback` as an exact Redirect URI on the same Spotify app, open Medley at `http://127.0.0.1:3000`, and restart the Next.js dev server after changing `.env.local`. The dev server allows both `localhost` and `127.0.0.1` so Next's HMR socket continues to work when either loopback name is used.
 
+## Local Supabase auth setup
+
+Create a hosted project in the [Supabase Dashboard](https://supabase.com/dashboard), then copy the Project URL and anon/public key into `.env.local` as `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`. Under **Authentication → Providers / Email**, turn **Confirm email** off so signup returns a session immediately (no confirmation email callback in this app yet). Restart the Next.js dev server after changing `.env.local`. Medley login is required before Spotify connect or playlist browsing.
+
 ## Overview
 
 Medley is a personal music companion that learns how *you* experience music.

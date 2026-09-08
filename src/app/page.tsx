@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { PlaylistBrowser } from "./playlist-browser";
+import { getMedleyUser } from "@/lib/supabase/auth";
 import { listPlaylists } from "@/lib/spotify/api";
 import { hasSpotifySession } from "@/lib/spotify/auth";
 
@@ -10,8 +11,10 @@ type HomeProps = {
 };
 
 export default async function Home({ searchParams }: HomeProps) {
+  const { user } = await getMedleyUser();
   const connected = await hasSpotifySession();
   const { spotify_error: spotifyError } = await searchParams;
+  const accountLabel = user?.email ?? "Signed in";
 
   if (!connected) {
     return (
@@ -22,6 +25,13 @@ export default async function Home({ searchParams }: HomeProps) {
           <p className="lede">
             Connect your Spotify account to browse your playlists and the songs
             inside them.
+          </p>
+          <p className="session-line">
+            {accountLabel}
+            {" · "}
+            <Link className="inline-link" href="/auth/logout" prefetch={false}>
+              Log out
+            </Link>
           </p>
           {spotifyError === "missing_config" && (
             <p className="config-notice">
@@ -52,6 +62,13 @@ export default async function Home({ searchParams }: HomeProps) {
           <p className="lede">
             {playlists.length} playlist{playlists.length === 1 ? "" : "s"}. Open
             one to see its tracks.
+          </p>
+          <p className="session-line">
+            {accountLabel}
+            {" · "}
+            <Link className="inline-link" href="/auth/logout" prefetch={false}>
+              Log out
+            </Link>
           </p>
         </div>
         <Link className="ghost-link" href="/api/spotify/logout">

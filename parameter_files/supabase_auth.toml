@@ -1,0 +1,2 @@
+# Where to send the user after a successful login or signup
+post_login_redirect = "/"
